@@ -1,2 +1,2 @@
-# 30daysofcode-May-leetcode
-I took up the 30 days of Code challenge by Leetcode, and here is my repository for all my optimized solutions.
+# Learning Competitive Coding
+This repository is a compilation of my solutions to a few of the questions found on LEETCODE.
