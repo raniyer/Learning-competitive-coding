@@ -1,0 +1,31 @@
+"""
+url to problem: https://leetcode.com/problems/container-with-most-water/
+
+
+max((i2 - i1)*((min(height[i2],height[i1])))
+
+brute force = O(n^2)
+    maxarea = min(height[1] , height[0])
+            for i in range(len(height)):
+                for j in range(i, len(height)):
+                    x = (j - i)*(min(height[j],height[i]))
+                    maxarea = x if (x > maxarea) else maxarea
+                    #print(i, j, height[i], height[j], maxarea)
+            return maxarea
+
+"""
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        L = 0
+        R = len(height)-1
+        maxarea = R*min(height[L], height[R])
+        while(L != R):
+            if height[L] > height[R]:
+                R -= 1
+            else:
+                L += 1
+            x = (R-L)*min(height[L], height[R])
+            if x > maxarea:
+                maxarea = x
+
+     return maxarea
