@@ -1,0 +1,34 @@
+"""
+url: https://leetcode.com/problems/3sum-closest/
+"""
+
+class Solution:
+    def threeSumClosest(self, nums: List[int], target: int) -> int:
+        nums.sort()
+        s = len(nums)
+        if s == 3:
+            return sum(nums)
+        i = 0
+        fl = [-1000]
+        ce = [1000]
+        while(i<s):
+            j = i+1
+            k = s-1
+            while(j<k):
+                x = nums[i] + nums[j] + nums[k]
+                if x == target:
+                    return x
+                elif x < target:
+                    j += 1
+                    if x>fl[0] :
+                        fl = [x, nums[i],nums[j],nums[k]]
+                else:
+                    k -= 1
+                    if x < ce[0]:
+                        ce = [x, nums[i],nums[j],nums[k]]
+                #print(x, nums[i],nums[j],nums[k], fl, ce)
+            i += 1
+        if abs(target - fl[0]) > abs(ce[0] - target):
+            return ce[0]
+        else:
+            return fl[0]
