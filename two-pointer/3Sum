@@ -1,0 +1,38 @@
+"""
+url: https://leetcode.com/problems/3sum/
+brute force method O(n^3)
+size = len(nums)
+res = []
+for i in range(size):
+    for j in range(i+1, size):
+        for k in range(j+1, size):
+            if (nums[i]+nums[j]+nums[k]==0):
+                x = sorted([nums[i],nums[j], nums[k]])
+                if x not in res:
+                    res.append(x)
+return res
+"""
+
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        if len(nums) < 3:
+            return []
+        nums.sort()
+        res = []
+        i=0
+        while(i<len(nums) and nums[i] <= 0):
+            j = 1+i
+            k = len(nums)-1
+            while(k > j):
+                x = nums[i] + nums[j] + nums[k]
+                if  x == 0:
+                    t = [nums[i], nums[j], nums[k]]
+                    if t not in res:
+                        res.append(t)
+                    j += 1
+                elif x < 0:
+                    j += 1
+                else:
+                    k -= 1
+            i += 1
+        return res
