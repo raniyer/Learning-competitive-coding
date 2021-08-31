@@ -1,0 +1,44 @@
+"""
+url: https://leetcode.com/problems/4sum/
+"""
+class Solution:
+        
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        s = len(nums)
+        if s < 4:
+            return []
+        if s == 4:
+            if sum(nums)== target:
+                return [nums]
+            else:
+                return []
+        nums.sort()
+        res = []
+        for i in range(s-3):
+            for j in range(i+1,s-2):
+                left = j+1
+                right = s-1
+                while(left < right):
+                    #print(left, right)
+                    temp = nums[i] + nums[j]+nums[left]+nums[right] 
+                    if temp == target:
+                        x = [nums[i], nums[j], nums[left], nums[right]]
+                        if x not in res:
+                            res.append(x)
+                        leftVal = nums[left]
+                        while(left < right and leftVal == nums[left]):
+                            left += 1
+                        rightVal = nums[right]
+                        while(left < right and rightVal == nums[right]):
+                            right -= 1
+                    elif temp < target:
+                        leftVal = nums[left]
+                        while(left < right and leftVal == nums[left]):
+                            left += 1
+                    else:
+                        rightVal = nums[right]
+                        while(left < right and rightVal == nums[right]):
+                            right -= 1
+        return res          
+        
+        
