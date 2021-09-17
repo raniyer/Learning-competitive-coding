@@ -1,0 +1,18 @@
+"""
+url:https://leetcode.com/problems/grumpy-bookstore-owner/
+"""
+class Solution:
+    def maxSatisfied(self, customers: List[int], grumpy: List[int], minutes: int) -> int:
+        end = 0
+        customerGained = 0
+        count = 0
+        maxcount = 0
+        for idx, (c, g) in enumerate(zip(customers, grumpy)):
+            if (idx - minutes == end):
+                count -= customers[end]*grumpy[end]
+                end += 1
+            customerGained += c*(g==0)
+            count += c*g
+            maxcount = max(maxcount, count)
+        return maxcount+customerGained
+            
