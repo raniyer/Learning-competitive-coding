@@ -1,0 +1,30 @@
+"""
+url: https://leetcode.com/problems/get-the-maximum-score/submissions/
+"""
+class Solution:
+    def maxSum(self, nums1: List[int], nums2: List[int]) -> int:
+        sum1 = 0
+        sum2 = 0
+        idx1 = 0
+        idx2 = 0
+        result = 0
+        while(idx1 < len(nums1) and idx2<len(nums2)):
+            if nums1[idx1] < nums2[idx2]:
+                sum1 += nums1[idx1]
+                idx1 += 1
+            elif nums1[idx1] > nums2[idx2]:
+                sum2 += nums2[idx2]
+                idx2 += 1
+            elif (nums1[idx1] == nums2[idx2]):
+                result += max(sum1, sum2) + nums1[idx1]
+                sum1 = 0
+                sum2 = 0
+                idx1 += 1
+                idx2 += 1
+        while(idx1<len(nums1)):
+            result += nums1[idx1]
+            idx1 += 1
+        while(idx2<len(nums2)):
+            result += nums2[idx2]
+            idx2 += 1
+        return result
