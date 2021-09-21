@@ -1,0 +1,17 @@
+"""
+url: https://leetcode.com/problems/number-of-subsequences-that-satisfy-the-given-sum-condition/
+"""
+
+class Solution:
+    def numSubseq(self, nums: List[int], target: int) -> int:
+        nums.sort()
+        right = len(nums) - 1
+        result = 0
+        mod = 10**9+7
+        for i in range(len(nums)):
+            while(i<=right and nums[i] + nums[right] > target):
+                right -= 1
+            if i <= right:
+                result += (2**(right - i))
+                result %= mod
+        return result
