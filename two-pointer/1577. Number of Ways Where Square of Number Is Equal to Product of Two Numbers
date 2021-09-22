@@ -1,0 +1,17 @@
+"""
+URL: https://leetcode.com/problems/number-of-ways-where-square-of-number-is-equal-to-product-of-two-numbers/submissions/
+"""
+from collections import Counter
+class Solution:
+    def numTriplets(self, nums1: List[int], nums2: List[int]) -> int:
+        def getTriplets(a1, a2):
+            A = Counter([a*a for a in a1])
+            B = Counter()
+            res = 0
+            for i in a2:
+                for j, k in B.items():
+                    if i*j in A:
+                        res += A[i*j]*k
+                B[i] += 1
+            return res
+        return getTriplets(nums1, nums2) + getTriplets(nums2, nums1)
