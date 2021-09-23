@@ -1,0 +1,28 @@
+"""
+url : https://leetcode.com/problems/longest-nice-substring
+"""
+class Solution:
+    def longestNiceSubstring(self, s: str) -> str:
+        def isNice(s):
+            pivot = -1
+            if len(s) < 2:
+                return ["", 0]
+            unorderedSet = set([x for x in s])
+            for i in range(len(s)):
+                if ord(s[i])<96:
+                    if s[i].lower() not in unorderedSet:
+                        pivot = i
+                else:
+                    if s[i].upper() not in unorderedSet:
+                        pivot = i                        
+            if pivot>=0:
+                if pivot == len(s)-1:
+                    return isNice(s[:pivot])
+                a = isNice(s[:pivot])
+                b = isNice(s[pivot+1:])            
+                return a if a[1]>=b[1] else b
+            else:
+                print(s, len(s))
+                return [s, len(s)]
+        [x1, x2] = isNice(s)
+        return x1
