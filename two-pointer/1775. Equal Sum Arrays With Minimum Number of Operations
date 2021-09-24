@@ -1,0 +1,36 @@
+"""
+URL: https://leetcode.com/problems/equal-sum-arrays-with-minimum-number-of-operations/
+"""
+class Solution:
+    def minOperations(self, nums1: List[int], nums2: List[int]) -> int:
+        sum1 = sum(nums1)
+        sum2 = sum(nums2)
+        if sum1 == sum2:
+            return 0
+        nums1.sort()
+        nums2.sort()
+        if sum1 > sum2:
+            more = nums1
+            moresum = sum1
+            less = nums2
+            lesssum = sum2
+        else:
+            more = nums2
+            moresum = sum2
+            less = nums1
+            lesssum = sum1
+        gains = [x-1 for x in more] + [6-x for x in less]
+        gains.sort(reverse = True)
+        target = moresum - lesssum
+        i = 0
+        res = 0
+        while(gains and 0 < target-gains[i]):
+            target -= gains[i]
+            gains.pop(i)
+            res += 1
+        if target == 0:
+            return res
+        elif gains and target <= gains[0]:
+            return res+1
+        else:
+            return -1
